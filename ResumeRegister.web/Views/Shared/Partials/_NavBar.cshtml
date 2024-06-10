@@ -1,0 +1,46 @@
+﻿@using System.Security.Claims;
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top me-4 ms-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" target="_blank" asp-controller="Home" asp-action="Index">
+            <img src="/Files/Logo/home-logo-hi.png" height="20" alt="" loading="lazy"
+                 style="margin-top: -3px;" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span><i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" aria-current="page" asp-controller="Home" asp-action="Index">خانه</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav d-flex flex-row">
+                <!-- User Section -->
+                <li>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item active">
+                            <div class="dropdown me-3 ms-3">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+                                    @User.FindFirstValue(ClaimTypes.GivenName) خوش آمدید
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li>
+                                        <a class="dropdown-item" type="button" asp-controller="Account" asp-action="EditUser" asp-route-userId="@User.FindFirstValue(ClaimTypes.NameIdentifier)">ویرایش مشخصات</a>
+                                    </li>
+                                    @*<li>
+                                    <button class="dropdown-item" type="button">Another action</button>
+                                    </li>*@
+                                    <li>
+                                        <a class="dropdown-item" type="button" asp-controller="Account" asp-action="Logout">خروج</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

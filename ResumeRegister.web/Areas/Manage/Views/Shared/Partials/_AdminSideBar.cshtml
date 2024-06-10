@@ -1,0 +1,29 @@
+﻿<aside class="app-sidebar">
+    @*<div class="app-sidebar__user">
+            <img class="app-sidebar__user-avatar" src="img/profile.png" alt="User Image">
+            <div>
+                <p class="app-sidebar__user-name">علی محمدی</p>
+                <p class="app-sidebar__user-designation">طراح ظاهر</p>
+            </div>
+        </div>*@
+    <ul class="app-menu">
+        @*<li><a class="treeview-item btn btn-info m-2" href="#" target="_blank"><i class="icon fa fa-download"></i> دانلود رایگان قالب</a></li>*@
+        <li><a class="app-menu__item" asp-controller="ManageHome" asp-action="Index"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">خانه</span></a></li>
+        <li><a class="app-menu__item" asp-controller="ManegeResume" asp-action="AdvancedSearch"><i class="app-menu__icon fa fa-search-plus"></i><span class="app-menu__label">جستجوی پیشرفته</span></a></li>
+        <li class="treeview">
+            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">‌مدیریت رزومه</span><i class="treeview-indicator fa fa-angle-left"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" asp-controller="ManegeResume" asp-action="ResumeChecked"><i class="icon fa fa-circle-o"></i> رزومه های بررسی شده</a></li>
+                <li><a class="treeview-item" asp-controller="ManegeResume" asp-action="ResumeAccepted"><i class="icon fa fa-circle-o"></i> رزومه های تایید شده</a></li>
+            </ul>
+        </li>
+        @*<li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">مدیریت</span></a></li>*@
+        <li class="treeview">
+            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">مدیریت</span><i class="treeview-indicator fa fa-angle-left"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" asp-controller="ManageAccount" asp-action="AddNewUser"><i class="icon fa fa-circle-o"></i> افزودن کاربر</a></li>
+                <li><a class="treeview-item" asp-controller="ManageAccount" asp-action="AllUser"><i class="icon fa fa-circle-o"></i> مدیریت کاربران</a></li>
+            </ul>
+        </li>
+    </ul>
+</aside>

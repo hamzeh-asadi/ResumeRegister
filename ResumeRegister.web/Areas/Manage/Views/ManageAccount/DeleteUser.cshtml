@@ -1,0 +1,42 @@
+﻿@model UserInfo
+@{
+    ViewData["Title"] = "حذف کاربر";
+}
+
+<div class="alert alert-warning" role="alert">
+    <h4> ایا از حذف کاربر با مشخصات ذیل مطمئن هستید ؟</h4>
+    <br />
+    <h5> توجه : با حذف کاربر رزومه و دسترسی های کاربر نیز حذف میشود !!!</h5>
+</div>
+<div class="d-flex align-items-center justify-content-center">
+    <div class="col-md-6">
+        <div class="tile ">
+            <form asp-controller="ManageAccount" asp-action="DeleteUser" method="post">
+                <div class="tile-body">
+                    <input type="hidden" asp-for="UserId" />
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="FullName">نام و نام خانوادگی : </span>
+                        <input type="text" class="form-control" asp-for="FullName" readonly="readonly">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="UserName">نام کاربری :</span>
+                        <input type="text" class="form-control" asp-for="UserName" readonly="readonly">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="Email">ایمیل :</span>
+                        <input type="text" class="form-control" asp-for="Email" readonly="readonly">
+                    </div>
+                </div>
+                <div class="tile-footer text-center">
+                    <button class="btn btn-danger" type="submit">
+                        <i class="fa fa-fw fa-lg fa-check-circle"></i>حذف
+                    </button>&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-primary" asp-controller="ManageAccount" asp-action="AllUser">
+                        <i class="fa fa-fw fa-lg fa-times-circle"></i>لغو
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div asp-validation-summary="All"></div>
+    </div>
+</div>

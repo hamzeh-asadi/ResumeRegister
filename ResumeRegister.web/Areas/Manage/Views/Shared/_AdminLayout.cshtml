@@ -1,0 +1,37 @@
+﻿
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+    <partial name="Partials/_AdminMetaTags"/>
+    <title>@ViewData["Title"]</title>
+    <partial name="Partials/_AdminLinkTags"/>
+    @await RenderSectionAsync("Links",false).ConfigureAwait(false)
+</head>
+<body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+<partial name="Partials/_AdminHeader" />
+    <!-- Sidebar menu-->
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<partial name="Partials/_AdminSideBar"/>
+<main class="app-content">
+    @RenderSection("BreadCrumb",false)
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">@RenderBody()</div>
+            </div>
+        </div>
+    </div>
+</main>
+<!--Footer-->
+<footer class="bg-light">
+    <div class="text-sm-end">
+        <a href="mailto:asadi_hamzeh@yahoo.com"><h6 class="font-weight-light small" style="font-size: 10px;">powered by Hamzeh_Asadi</h6></a>
+    </div>
+</footer>
+<!--Footer-->
+<partial name="Partials/_AdminScriptTags" />
+@await RenderSectionAsync("Scripts",false).ConfigureAwait(false)
+</body>
+</html>

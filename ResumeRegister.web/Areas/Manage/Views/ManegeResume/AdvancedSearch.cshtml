@@ -1,0 +1,195 @@
+﻿@model List<AdvancedSearchViewModel>
+@{
+    ViewData["Title"] = "جستجوی پیشرفته";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <h3 class="card-header">جستجوی پیشرفته</h3>
+        <div class="card-body">
+            <form class="row" asp-controller="ManegeResume" asp-action="AdvancedSearch" method="post">
+                <div class="form-floating mb-2 col-md-3">
+                    <input class="form-control" type="text" id="name" name="name">
+                    <label class="form-label ps-4" for="name">نام و نام خانوادگی</label>
+                </div>
+                <div class="form-floating mb-2 col-md-3">
+                    <input class="form-control" type="text" id="email" name="email">
+                    <label class="form-label ps-4" for="email">ایمیل</label>
+                </div>
+                <div class="form-floating mb-2 col-md-3">
+                    <input class="form-control" type="number" id="phone" name="phone">
+                    <label class="form-label ps-4" for="phone">تلفن</label>
+                </div>
+                <div class="form-floating mb-2 col-md-3">
+                    <input class="form-control" type="text" id="expertise" name="expertise">
+                    <label class="form-label ps-4" for="expertise">تخصص</label>
+                </div>
+                <div class="form-floating mb-2 col-md-3">
+                    <input class="form-control" type="text" id="MajorStudy" name="MajorStudy">
+                    <label class="form-label ps-4" for="MajorStudy">رشته تحصیلی</label>
+                </div>
+                <div class="form-floating mb-2 col-md-3">
+                    <input class="form-control" type="text" id="MinorStudy" name="MinorStudy">
+                    <label class="form-label ps-4" for="MinorStudy">گرایش تحصیلی</label>
+                </div>
+
+                <div class="form-floating mb-2 col-md-3">
+                    <input class="form-control" type="text" id="university" name="university">
+                    <label class="form-label ps-4" for="university">دانشگاه</label>
+                </div>
+                
+                <div class="form-floating mb-2 col-md-3">
+                    <input class="form-control" type="text" id="birthLocation" name="birthLocation">
+                    <label class="form-label ps-4" for="birthLocation">محل تولد</label>
+                </div> 
+                <div class="form-floating mb-2 col-md-3">
+                    <input class="form-control" type="text" id="residenceLocation" name="residenceLocation">
+                    <label class="form-label ps-4" for="residenceLocation">محل سکونت</label>
+                </div>
+
+                <div class="form-floating mb-2 col-md-3">
+                    <input class="form-control" type="number" id="MinBackground" name="MinBackground">
+                    <label class="form-label ps-4" for="MinBackground">حداقل سابقه کار</label>
+                </div>
+                <div class="form-floating mb-2 col-md-3">
+                    <input class="form-control" type="number" id="MaxBackground" name="MaxBackground">
+                    <label class="form-label ps-4" for="MaxBackground">حداکثر سابقه کار</label>
+                </div>
+                <div class="card">
+                    <div class="row card-body">
+                        <div class="tile mb-2 col-md-3">
+                            <div class="form-check ">
+                                <input class="form-check-input" type="radio" name="isChecked" id="isChecked1" value="true">
+                                <label class="form-check-label" for="isChecked1">
+                                    بررسی شده
+                                </label>
+                            </div>
+                            <div class="form-check ">
+                                <input class="form-check-input" type="radio" name="isChecked" id="isChecked2" value="false">
+                                <label class="form-check-label" for="isChecked2">
+                                    عدم بررسی
+                                </label>
+                            </div>
+                        </div>
+                        <div class="tile mb-2 col-md-3">
+                            <div class="form-check ">
+                                <input class="form-check-input" type="radio" name="isAccepted" id="isAccepted1" value="true">
+                                <label class="form-check-label" for="isAccepted1">
+                                    تایید شده
+                                </label>
+                            </div>
+                            <div class="form-check ">
+                                <input class="form-check-input" type="radio" name="isAccepted" id="isAccepted2" value="false">
+                                <label class="form-check-label" for="isAccepted2">
+                                    عدم تایید
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div >
+                        <button class="btn btn-primary m-2" style="width: 170px" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>جستجو</button>
+                        <a class="btn btn-warning" style="width: 170px" asp-controller="ManegeResume" asp-action="AdvancedSearch"><i class="fa fa-fw fa-lg fa-times-circle"></i>پاک کردن تمام فیلترها</a>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<table id="table" class="text-center" data-filter-control="true" data-pagination="true" data-show-multi-sort="true" data-mobile-responsive="true">
+    <thead>
+        <tr>
+            <th data-visible="false">Id</th>
+            <th data-sortable="true" data-field="tier" data-filter-control="select">ردیف</th>
+            <th data-sortable="true" data-field="name" data-filter-control="input">نام و نام خانوادگی</th>
+            <th data-sortable="true" data-field="major" data-filter-control="input">رشته</th>
+            <th data-sortable="true" data-field="backgrond" data-filter-control="input">سابقه</th>
+            <th data-sortable="true" data-field="check" data-filter-control="select">بررسی</th>
+            <th data-sortable="true" data-field="accept" data-filter-control="select">تایید</th>
+            <th>جزئیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model != null)
+            {
+                int counter = 1;
+                foreach (var resume in Model)
+                {
+                    <tr>
+                        <td>@resume.ResumeId</td>
+                        <td>@counter</td>
+                        <td>@resume.FullName</td>
+                        <td>@resume.MajorStudy</td>
+                        <td>@resume.WorkBackground</td>
+                        <td>
+                            @if (resume.IsChecked != null)
+                            {
+                                if (resume.IsChecked == true)
+                                {
+                                    <p class="bg-success">بررسی شده</p>
+                                }
+                                else
+                                {
+                                    <p class="bg-danger">عدم بررسی</p>
+                                }
+                            }
+                            else
+                            {
+                                <p class="bg-light">نامشخص</p>
+                            }
+                        </td>
+                        <td>
+                            @if (resume.IsChecked != null)
+                            {
+                                @if (resume.IsAccepted == true)
+                                {
+                                    <p class="bg-success">تایید</p>
+                                }
+                                else
+                                {
+                                    <p class="bg-danger">عدم تایید</p>
+                                }
+                            }
+                            else
+                            {
+                                <p class="bg-light">نامشخص</p>
+                            }
+
+                        </td>
+
+                        <td>
+                            @if (resume.ResumeId != 0)
+                            {
+                                <a asp-controller="ManegeResume" asp-action="ResumeInfo" asp-route-resumeId="@resume.ResumeId">
+                                    <button type="submit" class="btn btn-outline-success">
+                                        <i class="fa fa-user-edit" data-toggle="tooltip" data-placement="top" title=" جزئیات"></i>
+                                        جزئیات
+                                    </button>
+                                </a>
+                            }
+                            else
+                            {
+                                <p class="bg-light">نامشخص</p>
+                            }
+
+                        </td>
+                    </tr>
+                    counter++;
+                }
+            }
+        }
+    </tbody>
+</table>
+@section Links
+{
+    <partial name="Partials/_TableLinks" />
+}
+@section Scripts
+{
+    <partial name="Partials/_TableScripts" />
+}
+

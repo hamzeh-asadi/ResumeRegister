@@ -1,0 +1,95 @@
+﻿@inject IPermissionService _permission
+@model List<UserInfo>
+@{
+    ViewData["Title"] = "کاربران";
+}
+@section BreadCrumb
+{
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-dashboard"></i> لیست کاربران سایت</h1>
+            @*<p>Start a beautiful journey here</p>*@
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="ManageHome" asp-action="Index"><i class="fa fa-home fa-lg"></i></a></li>
+            <li class="breadcrumb-item"><a href="#">کاربران</a></li>
+        </ul>
+    </div>
+}
+<table id="table" data-toggle="table" class="text-center" data-filter-control="true" data-pagination="true" data-mobile-responsive="true">
+    <thead>
+        <tr>
+            <th data-visible="false">Id</th>
+            <th data-sortable="true" data-filter-control="select">ردیف</th>
+            <th data-sortable="true" data-filter-control="input">نام و نام خانوادگی</th>
+            <th data-sortable="true" data-filter-control="input">نام کاربری</th>
+            <th data-sortable="true" data-filter-control="input">ایمیل</th>
+            <th data-sortable="true">فعال</th>
+            <th data-sortable="true">مدیر</th>
+            <th>دستورات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int counter = 1;
+            foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserId</td>
+                    <td>@counter</td>
+                    <td>@user.FullName</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        @if (user.IsActive)
+                        {
+                            <p class="bg-success">فعال</p>
+                        }
+                        else
+                        {
+                            <p class="bg-danger">غیرفعال</p>
+                        }
+
+                    </td>
+                    <td>
+                        @if (_permission.IsUserAdmin(user.UserName))
+                        {
+                            <text>مدیر</text>
+                        }
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col">
+                                <a asp-controller="ManageAccount" asp-action="EditUser" asp-route-userId="@user.UserId">
+                                    <button type="submit" class="btn btn-outline-primary">
+                                        <i class="fa fa-user-edit" data-toggle="tooltip" data-placement="top" title="ویرایش کاربر"></i>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a asp-controller="ManageAccount" asp-action="DeleteUser" asp-route-userId="@user.UserId">
+                                    <button type="button" class="btn btn-outline-danger ">
+                                        <i class="fa fa-trash-alt" data-toggle="tooltip" data-placement="top" title="حذف کاربر"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                counter++;
+            }
+        }
+    </tbody>
+</table>
+
+
+
+@section Links
+{
+    <partial name="Partials/_TableLinks" />
+}
+@section Scripts
+{
+    <partial name="Partials/_TableScripts" />
+
+}

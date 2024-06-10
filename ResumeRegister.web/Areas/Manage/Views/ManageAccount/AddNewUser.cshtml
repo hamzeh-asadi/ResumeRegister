@@ -1,0 +1,107 @@
+﻿@model AdminUserRegisterViewModel
+@{
+    ViewData["Title"] = "افرودن کاربر";
+    List<Role> roles = ViewData["AllRoles"] as List<Role>;
+}
+<div>
+    @if (TempData["AddUserSuccess"] != null)
+    {
+        <div class="widget-small info">
+            <i class="icon fa fa-thumbs-o-up fa-3x"></i>
+            <div class="info">
+                <h4>ثبت کاربر با موفقیت انجام شد .</h4>
+            </div>
+        </div>
+
+    }
+    <form class="bg-white rounded shadow-5-strong p-5" asp-action="AddNewUser" asp-controller="ManageAccount">
+
+        <div class="row">
+            <div class="col-md-7 align-items-center">
+                <!-- UserName input -->
+                <div class="input-group flex-nowrap  mb-4">
+                    <span class="input-group-text">نام کاربری</span>
+                    <input type="text" asp-for="UserName" id="UserName" class="form-control" />
+                </div>
+                <!-- First Name input -->
+                <div class="input-group flex-nowrap  mb-4">
+                    <span class="input-group-text">نام</span>
+                    <input type="text" asp-for="FirstNameUser" class="form-control" />
+                </div>
+                <!-- Last Name input -->
+                <div class="input-group flex-nowrap  mb-4">
+                    <span class="input-group-text">نام خانوادگی</span>
+                    <input type="text" asp-for="LastNameUser" class="form-control" />
+                </div>
+
+                <!-- Email input -->
+                <div class="input-group flex-nowrap  mb-4">
+                    <span class="input-group-text">ایمیل</span>
+                    <input type="email" asp-for="Email" class="form-control" />
+                </div>
+
+                <!-- Password input -->
+                <div class="input-group flex-nowrap  mb-4">
+                    <span class="input-group-text">رمز عبور</span>
+                    <input type="password" asp-for="Password" class="form-control" />
+                </div>
+                <!-- Password input -->
+                <div class="input-group flex-nowrap  mb-4">
+                    <span class="input-group-text">تکرار رمز عبور</span>
+                    <input type="password" asp-for="RePassword" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-5 align-items-center justify-content-center">
+                <div class="tile">
+                    <div class="tile-title-w-btn">وضعیت کاربر</div>
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio" asp-for="IsActive" id="IsActive" value="true" checked="checked">
+                        <label class="form-check-label" for="IsActive">
+                            فعال
+                        </label>
+                    </div>
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio" asp-for="IsActive" id="IsActive2" value="false">
+                        <label class="form-check-label" for="IsActive2">
+                            غیر فعال
+                        </label>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-title-w-btn">دسترسی </div>
+                    <div class="tile-body align-items-center justify-content-center">
+                        @foreach (var role in roles)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="@role.RoleId" id="RoleId" name="selectedRole">
+                                <label class="form-check-label" for="RoleId">
+                                    @role.RoleTitle
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block">ثبت نام</button>
+            <!-- 2 column grid layout for inline styling -->
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+    </form>
+</div>
+
+@section BreadCrumb
+{
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-dashboard"></i> مدیریت</h1>
+            <p>افزودن کاربر جدید</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">صفحه اول سایت</a></li>
+        </ul>
+    </div>
+}

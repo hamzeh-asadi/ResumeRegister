@@ -1,0 +1,59 @@
+﻿
+<header class="app-header">
+    <a class="app-header__logo hidden-mobile" href="#">پنل مدیریت سایت</a>
+    <!-- Sidebar toggle button-->
+    <a class="fas fa-bars app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+        @*<li class="app-search">
+            <input class="app-search__input" type="search" placeholder="جستجو">
+            <button class="app-search__button"><i class="fa fa-search"></i></button>
+        </li>*@
+        <!--Notification Menu-->
+        @*<li class="dropdown">
+            <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
+            <ul class="app-notification dropdown-menu dropdown-menu-right">
+                <li class="app-notification__title">شما 3 رویداد جدید دارید</li>
+                <div class="app-notification__content">
+                    <li>
+                        <a class="app-notification__item" href="javascript:;">
+                            <span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                            <div>
+                                <p class="app-notification__message">اکبر ایملی به شما ارسال کرد</p>
+                                <p class="app-notification__meta">2 دقیقه پیش</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="app-notification__item" href="javascript:;">
+                            <span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                            <div>
+                                <p class="app-notification__message">سرور ایمیل از کار افتاد!</p>
+                                <p class="app-notification__meta">5 دقیقه پیش</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="app-notification__item" href="javascript:;">
+                            <span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                            <div>
+                                <p class="app-notification__message">تراکنش انجام شد</p>
+                                <p class="app-notification__meta">2 روز پیش</p>
+                            </div>
+                        </a>
+                    </li>
+                </div>
+                <li class="app-notification__footer"><a href="#">نمایش همه رویداد‌ها</a></li>
+            </ul>
+        </li>*@
+        <!-- User Menu-->
+        <li class="dropdown">
+            <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"> @User.FindFirstValue(ClaimTypes.GivenName) خوش امدید <i class="fa fa-user fa-lg"></i></a>
+            <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                @*<li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> تنظیمات</a></li>
+                <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> پروفایل</a></li>*@
+                <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt fa-lg"></i> خروج</a></li>
+            </ul>
+        </li>
+    </ul>
+</header>

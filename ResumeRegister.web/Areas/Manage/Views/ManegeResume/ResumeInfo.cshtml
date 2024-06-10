@@ -1,0 +1,160 @@
+﻿@model ResumeDetailViewModel
+@{
+    ViewData["Title"] = "مشخصات رزومه";
+}
+
+<div class="row">
+    <div class="col-md-6 col-lg-6">
+        <div class="card mb-3 border-info">
+            <div class="card-header">@Model.FullName</div>
+            <div class="card-body">
+                <!-- Year Of Birth -->
+                <div class="input-group flex-nowrap  mb-4">
+                    <span class="input-group-text">سال تولد</span>
+                    <input type="number" class="form-control" asp-for="Birthday" placeholder="13xx" onKeyPress="if(this.value.length==4) return false;" disabled="disabled"/>
+                </div>
+             
+                <!-- Work Background input -->
+                <div class="input-group flex-nowrap mb-4">
+                    <span class="input-group-text">سابقه کار </span>
+                    <input type="number" class="form-control" asp-for="WorkBackground" disabled="disabled"/>
+                </div>
+                <!-- Phone input -->
+                <div class="input-group flex-nowrap mb-4">
+                    <span class="input-group-text">تلفن</span>
+                    <input type="number" class="form-control" asp-for="Phone" onKeyPress="if(this.value.length==11) return false;" disabled="disabled"/>
+                </div>
+                <!-- Brith Location -->
+                <div class="card border border-primary">
+                    <div class="card-header">
+                        محل تولد
+                    </div>
+                    <div class="card-body ">
+                        <div class="input-group flex-nowrap mb-4">
+                            <span class="input-group-text">استان</span>
+                            <input type="text" class="form-control" asp-for="ProvinceOfBirth" disabled="disabled"/>
+                        </div>
+                        <div class="input-group flex-nowrap mb-1">
+                            <span class="input-group-text">شهر</span>
+                            <input type="text" class="form-control" asp-for="CityOfBirth" disabled="disabled"/>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Residence Location -->
+                <div class="card border border-primary">
+                    <div class="card-header">
+                        محل سکونت
+                    </div>
+                    <div class="card-body ">
+                        <div class="input-group flex-nowrap mb-4">
+                            <span class="input-group-text">استان</span>
+                            <input type="text" class="form-control" asp-for="ProvinceOfResidence" disabled="disabled"/>
+                        </div>
+                        <div class="input-group flex-nowrap mb-1">
+                            <span class="input-group-text">شهر</span>
+                            <input type="text" class="form-control" asp-for="CityOfResidence" disabled="disabled"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6">
+        <div class="card mb-3 border-info">
+            <div class="card-body">
+                <!-- Personal Image -->
+                <section>
+                    <div class="text-center">
+                        <img id="personalImg" style="width: 200px; height: 200px;" src="/Files/Images/@Model.PictureName" />
+                        <br />
+                    </div>
+                </section>
+                <br />
+                <!-- Expertise input -->
+                <!-- Year Of Birth -->
+                <div class="input-group flex-nowrap  mb-4">
+                    <span class="input-group-text">دانشگاه</span>
+                    <input type="text" class="form-control" asp-for="University" disabled="disabled"/>
+                </div>
+                <!-- Major Study input -->
+                <div class="input-group flex-nowrap  mb-4">
+                    <span class="input-group-text">رشته تحصیلی </span>
+                    <input type="text" class="form-control" asp-for="MajorStudy" disabled="disabled"/>
+                </div>
+                <!-- Minor Study input -->
+                <div class="input-group flex-nowrap mb-4">
+                    <span class="input-group-text">گرایش تحصیلی </span>
+                    <input type="text" class="form-control" asp-for="MinorStudy" disabled="disabled"/>
+                </div>
+                <div class="form-group shadow-textarea">
+                    <label asp-for="Expertise">تخصص ها</label>
+                    <textarea class="form-control z-depth-1" asp-for="Expertise" rows="6" placeholder="لطفا تخصص های کاری را با (-) جدا و به اختصار وارد کنید" disabled="disabled"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card  border-info d-flex justify-content-center align-content-center">
+        <form asp-controller="ManegeResume" asp-action="ResumeInfo" asp-route-resumeId="@Model.ResumeId">
+            <div class="d-md-flex d-lg-flex justify-content-between col-sm-12">
+                @* check resume section *@
+                <div class="tile  align-items-center justify-content-center col-md-4 col-lg-4 col-sm-12">
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio" asp-for="IsChecked" id="IsChecked1" value="true">
+                        <label class="form-check-label" for="IsChecked1">
+                            بررسی شده
+                        </label>
+                    </div>
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio" asp-for="IsChecked" id="IsChecked2" value="false">
+                        <label class="form-check-label" for="IsChecked2">
+                            عدم بررسی
+                        </label>
+                    </div>
+                </div>
+                @* accept resume section *@
+                <div class="tile  align-items-center justify-content-center col-md-4 col-lg-4 col-sm-12">
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio" asp-for="IsAccepted" id="IsAccepted1" value="true">
+                        <label class="form-check-label" for="IsAccepted1">
+                            تایید شده
+                        </label>
+                    </div>
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio" asp-for="IsAccepted" id="IsAccepted2" value="false">
+                        <label class="form-check-label" for="IsAccepted2">
+                            عدم تایید
+                        </label>
+                    </div>
+                </div>
+                @* control and submit section *@
+                <div class="tile  align-items-center justify-content-center col-md-4 col-lg-4 col-sm-12">
+                    <div class=" d-flex justify-content-between">
+                        <button class="btn btn-primary px-1 mx-1" type="submit" style="width: 80px">ذخیره</button>
+                        <button class="btn btn-secondary px-1 mx-1" type="submit" style="width: 80px">
+                            <a asp-controller="ManageHome" asp-action="Index">لغو</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div asp-validation-summary="All"></div>
+    </div>
+
+    <div class="card  border-info d-flex justify-content-between">
+
+        <div class=" mb-4 form-check-inline">
+            <label class="form-label form-check-inline">دانلود فایل رزومه : </label>
+            <a asp-controller="ManegeResume" asp-action="DownloadResume" asp-route-resumeName="@Model.ResumeName">@Model.ResumeName </a>
+        </div>
+        <div class="text-center">
+
+            <object data="/Files/@Model.ResumeName" width="700" height="600">
+                <embed src="/Files/@Model.ResumeName" width="700px" height="600px">
+                <p>This browser does not support PDFs. Please download the PDF to view it: <a href="/Files/@Model.ResumeName">View the PDF</a>.</p>
+                </embed>
+            </object>
+        </div>
+    </div>
+</div>

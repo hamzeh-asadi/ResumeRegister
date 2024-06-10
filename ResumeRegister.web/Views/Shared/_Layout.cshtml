@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <partial name="Partials/_MetaTags" />
+    <title>@ViewData["Title"]</title>
+    <partial name="Partials/_LinkTags" />
+</head>
+<body>
+
+    <!--Main Navigation-->
+    <header>
+        <!-- Navbar -->
+        <partial name="Partials/_NavBar" />
+        <!-- Navbar -->
+        <!-- Jumbotron -->
+        <div id="intro" class="p-5 text-center bg-light">
+            @RenderSection("TitleOfPage",false)
+        </div>
+        <!-- Jumbotron -->
+    </header>
+    <!--Main Navigation-->
+    <!--Main layout-->
+    <main class="mt-4 mb-5">
+
+        <div class="container">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-3 mb-3">
+                    <!--Section: Sidebar-->
+                    <section class="sticky-top" style="top: 80px;">
+                        <!--Section: Ad-->
+                        <partial name="Partials/_rightSection" />
+                        
+                        <!--Section: Ad-->
+                        
+                    </section>
+                    <!--Section: Sidebar-->
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-md-9 mb-2">
+                    
+                    <!--Section: Text-->
+                    <section>
+                        @RenderBody()
+                    </section>
+                    <!--Section: Text-->
+                    
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+        </div>
+
+
+        
+    </main>
+    <!--Main layout-->
+    <!--Footer-->
+    <footer class="bg-light">
+        <div class="text-sm-end">
+            <a href="mailto:asadi_hamzeh@yahoo.com"><h6 class="font-weight-light small" style="font-size: 10px;">powered by Hamzeh_Asadi</h6></a>
+        </div>
+    </footer>
+    <!--Footer-->
+
+    <partial name="Partials/_ScriptTags" />
+    @await RenderSectionAsync("Scripts", required: false).ConfigureAwait(false)
+</body>
+
+</html>

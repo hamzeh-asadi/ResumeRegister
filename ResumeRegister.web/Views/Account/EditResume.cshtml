@@ -1,0 +1,156 @@
+﻿@model ResumeEditViewModel
+@{
+    ViewData["Title"] = "ویرایش رزومه";
+    var user = ViewData["UserData"] as UserInfo;
+}
+
+<div class="mx-auto align-items-center text-center">@user.FullName</div>
+<div class="row justify-content-center">
+    <form class="bg-white rounded shadow-5-strong p-5" method="post" asp-action="EditResume" asp-controller="Account" enctype="multipart/form-data">
+        <input type="hidden" asp-for="UserId" />
+        <input type="hidden" asp-for="ResumeId" />
+        <input type="hidden" asp-for="PictureName" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Year Of Birth -->
+                <div class="input-group flex-nowrap  mb-4">
+                    <span class="input-group-text">سال تولد</span>
+                    <input type="number" class="form-control" asp-for="Birthday" placeholder="13xx" onKeyPress="if(this.value.length==4) return false;" />
+                </div>
+                <!-- Year Of Birth -->
+                <div class="input-group flex-nowrap  mb-4">
+                    <span class="input-group-text">دانشگاه</span>
+                    <input type="text" class="form-control" asp-for="University" />
+                </div>
+                <!-- Major Study input -->
+                <div class="input-group flex-nowrap  mb-4">
+                    <span class="input-group-text">رشته تحصیلی </span>
+                    <input type="text" class="form-control" asp-for="MajorStudy" />
+                </div>
+                <!-- Minor Study input -->
+                <div class="input-group flex-nowrap mb-4">
+                    <span class="input-group-text">گرایش تحصیلی </span>
+                    <input type="text" class="form-control" asp-for="MinorStudy" />
+                </div>
+                <!-- Work Background input -->
+                <div class="input-group flex-nowrap mb-4">
+                    <span class="input-group-text">سابقه کار </span>
+                    <input type="number" class="form-control" asp-for="WorkBackground" />
+                </div>
+
+                <!-- Phone input -->
+                <div class="input-group flex-nowrap mb-4">
+                    <span class="input-group-text">تلفن</span>
+                    <input type="number" class="form-control" asp-for="Phone" onKeyPress="if(this.value.length==11) return false;" />
+                </div>
+                <!-- Brith Location -->
+                <div class="card border border-primary">
+                    <div class="card-header">
+                        محل تولد
+                    </div>
+                    <div class="card-body ">
+                        <div class="input-group flex-nowrap mb-4">
+                            <span class="input-group-text">استان</span>
+                            <input type="text" class="form-control" asp-for="ProvinceOfBirth" />
+                        </div>
+                        <div class="input-group flex-nowrap mb-1">
+                            <span class="input-group-text">شهر</span>
+                            <input type="text" class="form-control" asp-for="CityOfBirth" />
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Residence Location -->
+                <div class="card border border-primary">
+                    <div class="card-header">
+                        محل سکونت
+                    </div>
+                    <div class="card-body ">
+                        <div class="input-group flex-nowrap mb-4">
+                            <span class="input-group-text">استان</span>
+                            <input type="text" class="form-control" asp-for="ProvinceOfResidence" />
+                        </div>
+                        <div class="input-group flex-nowrap mb-1">
+                            <span class="input-group-text">شهر</span>
+                            <input type="text" class="form-control" asp-for="CityOfResidence" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Personal Image -->
+                <section>
+                    <div class="text-center">
+                        <img id="personalImg" style="width: 200px; height: 200px;" src="/Files/Images/@Model.PictureName" />
+                        <br />
+                        <div class="form-group">
+                            <label class="form-label" for="imgInput">انتخاب عکس پرسنلی(کمتر از 200*200 پیکسل)</label>
+                            <input type="file" class="form-control" name="imgInput" id="imgInput" accept="image/jpg,image/jpeg,image/pjpeg,image/gif,image/x-png,image/png,image/bmp" />
+                        </div>
+                    </div>
+                </section>
+                <br />
+                <!-- Expertise input -->
+                <div class="form-group shadow-textarea">
+                    <label asp-for="Expertise">تخصص ها</label>
+                    <textarea class="form-control z-depth-1" asp-for="Expertise" rows="6" placeholder="لطفا تخصص های کاری را با (-) جدا و به اختصار وارد کنید"></textarea>
+                </div>
+            </div>
+            <p></p>
+            <hr />
+            <!-- File Resume input -->
+            <div class="form-group">
+                @if (Model.ResumeName != null)
+                {
+                    <label class="form-label" for="resumeFile">
+                        فایل رزومه شما موجود است .درصورت نیاز تغییر دهید
+                        <a asp-controller="Account" asp-action="DownloadResume" asp-route-resumeName="@Model.ResumeName">دانلود فایل رزومه </a>
+                    </label>
+                }
+                else
+                {
+                    <label class="form-label" for="resumeFile">انتخاب فایل رزومه PDF</label>
+                }
+                <input type="file" class="form-control" name="resumeFile" id="resumeFile" accept="application/pdf" placeholder="@Model.ResumeName" />
+            </div>
+        </div>
+        <br />
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block">ثبت رزومه</button>
+        <!-- 2 column grid layout for inline styling -->
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </form>
+</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            var _URL = window.URL || window.webkitURL;
+            $('#imgInput').change(function () {
+                var file = $(this)[0].files[0];
+                img = new Image();
+                var imgWidth = 0;
+                var imgHeight = 0;
+                img.src = _URL.createObjectURL(file);
+                img.onload = function () {
+                    imgWidth = this.width;
+                    imgHeight = this.height;
+                    if (imgWidth <= 200 && imgHeight <= 200) {
+                        $("#personalImg").attr('src', _URL.createObjectURL(file));
+                    }
+                    else {
+                        alert("اندازه عکس بزرگ است لطفا عکسی با اندازه تعیین شده انتخاب کنید");
+                        $("#imgInput").val('');
+                    }
+                };
+                img.onerror = function () {
+                    alert("خطا در ارسال فایل ! دوباره تلاش کنید");
+                    $("#imgInput").val('');
+                }
+            });
+        });
+
+    </script>
+}

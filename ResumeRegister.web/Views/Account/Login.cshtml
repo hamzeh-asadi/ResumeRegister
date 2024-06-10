@@ -1,0 +1,130 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>ورود کاربر</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/lib/fontawesome-pro-5.15.1-web-ulabs/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="/templateLib/css/mdb.rtl.min.css" />
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/templateLib/css/style.css" />
+    <link href="/css/site.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!--Main Navigation-->
+    <style>
+        #intro {
+            background-image: url(/templateLib/Picture/javehDam.jpg);
+            height: 100vh;
+            margin-top: 1px;
+        }
+    </style>
+
+    <!-- Navbar -->
+    <!-- Navbar -->
+    <!-- Background image -->
+    <div id="intro" class="bg-image ">
+        <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-5 col-md-8">
+                        <form class="bg-white rounded shadow-5-strong p-5" asp-action="Login" asp-controller="Account">
+                            @if (TempData["AddUserSuccess"] != null)
+                            {
+
+                                <div class="alert alert-primary" role="alert">
+                                    <i class="icon fa fa-thumbs-o-up fa-3x"></i>
+                                    ثبت نام با موفقیت انجام شد .
+                                </div>
+                                <br />
+                            }
+                            <!-- UserName input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" asp-for="UserName" class="form-control" />
+                                <label class="form-label" asp-for="UserName"></label>
+                            </div>
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" asp-for="Password" class="form-control" />
+                                <label class="form-label" asp-for="Password"></label>
+                            </div>
+                            <!-- Captcha input -->
+                            <div class="border border-primary p-2">
+                                <div class="text-center">
+                                    <dnt-captcha asp-captcha-generator-max="9999999"
+                                                 asp-captcha-generator-min="1111"
+                                                 asp-captcha-generator-language="English"
+                                                 asp-captcha-generator-display-mode="ShowDigits"
+                                                 asp-use-relative-urls="true"
+                                                 asp-placeholder="کد امنیتی"
+                                                 asp-validation-error-message="کد امنیتی را وارد کنید"
+                                                 asp-font-name="Tahoma"
+                                                 asp-font-size="20"
+                                                 asp-fore-color="#333333"
+                                                 asp-back-color="#ccc"
+                                                 asp-text-box-class="text-box form-control"
+                                                 asp-text-box-template="<div class='input-group'><span class='input-group-prepend'></span>{0}</div>"
+                                                 asp-validation-message-class="text-danger"
+                                                 asp-refresh-button-class="fas fa-redo btn-sm"
+                                                 asp-use-noise="false" />
+                                </div>
+                            </div>
+                            <p></p>
+                            <!-- Remember me input -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" asp-for="RememberMe" />
+                                <label class="form-check-label" asp-for="RememberMe"></label>
+                            </div>
+                            <br />
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block">ورود</button>
+                            <!-- 2 column grid layout for inline styling -->
+                            <br />
+                            <div class="row mb-4">
+                                <div class="col text-center">
+                                    <!-- Simple link -->
+                                    <a asp-action="RegisterUser" asp-controller="Account">ثبت نام</a>
+                                </div>
+                            </div>
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                        </form>
+                        <div class="text-sm-end">
+                            <a href="mailto:asadi_hamzeh@yahoo.com"><h6 class="font-weight-light small">در صورت بروز مشکل با ایمیل asadi_hamzeh@yahoo.com تماس بگیرید</h6></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-sm-end">
+                    <a href="mailto:asadi_hamzeh@yahoo.com"><h6 class="font-weight-light small" style="font-size: 10px;">powered by Hamzeh_Asadi</h6></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background image -->
+    <!--Main Navigation-->
+    <!--Footer-->
+    <!--Footer-->
+    <!-- MDB -->
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript" src="/templateLib/js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript" src="/templateLib/js/script.js"></script>
+
+    <script src="/js/site.js"></script>
+</body>
+</html>

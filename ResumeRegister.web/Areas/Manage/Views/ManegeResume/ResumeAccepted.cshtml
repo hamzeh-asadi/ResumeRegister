@@ -1,0 +1,92 @@
+﻿@using Microsoft.EntityFrameworkCore.Metadata
+@model List<ResumeRegister.datalayer.Entities.Resume.ResumeInfo>
+@{
+    ViewData["Title"] = "Index";
+    var userInfo = ViewData["AllUser"] as List<UserFullNameAndIdViewModel>;
+}
+
+
+<table id="table" class="text-center" data-filter-control="true" data-pagination="true" data-show-multi-sort="true" data-mobile-responsive="true">
+    <thead>
+        <tr>
+            <th data-visible="false">Id</th>
+            <th data-sortable="true" data-field="tier" data-filter-control="select">ردیف</th>
+            <th data-sortable="true" data-field="name" data-filter-control="input">نام و نام خانوادگی</th>
+            <th data-sortable="true" data-field="major" data-filter-control="input">رشته</th>
+            <th data-sortable="true" data-field="backgrond" data-filter-control="input">سابقه</th>
+            <th data-sortable="true" data-field="check" data-filter-control="select">بررسی</th>
+            <th data-sortable="true" data-field="accept" data-filter-control="select">تایید</th>
+            <th>جزئیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int counter = 1;
+            foreach (var resume in Model)
+            {
+                <tr>
+                    <td>@resume.ResumeId</td>
+                    <td>@counter</td>
+                    <td>@userInfo.FirstOrDefault(u => u.UserId == resume.UserId)?.FullName</td>
+                    <td>@resume.MajorStudy</td>
+                    <td>@resume.WorkBackground</td>
+                    <td>
+                        @if (resume.IsChecked)
+                        {
+                            <p class="bg-success">بررسی شده</p>
+                        }
+                        else
+                        {
+                            <p class="bg-danger">عدم بررسی</p>
+                        }
+                    </td>
+                    <td>
+                        @if (resume.IsAccepted)
+                        {
+                            <p class="bg-success">تایید</p>
+                        }
+                        else
+                        {
+                            <p class="bg-danger">عدم تایید</p>
+                        }
+
+                    </td>
+
+                    <td>
+                        <a asp-controller="ManegeResume" asp-action="ResumeInfo" asp-route-resumeId="@resume.ResumeId">
+                            <button type="submit" class="btn btn-outline-success">
+                                <i class="fa fa-user-edit" data-toggle="tooltip" data-placement="top" title=" جزئیات"></i>
+                                جزئیات
+                            </button>
+                        </a>
+
+                    </td>
+                </tr>
+                counter++;
+            }
+        }
+    </tbody>
+</table>
+
+
+@section BreadCrumb
+{
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-dashboard"></i> مدیریت</h1>
+            <p>لیست رزومه های تایید شده</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">صفحه اول سایت</a></li>
+        </ul>
+    </div>
+}
+@section Links
+{
+    <partial name="Partials/_TableLinks" />
+}
+@section Scripts
+{
+    <partial name="Partials/_TableScripts" />
+}

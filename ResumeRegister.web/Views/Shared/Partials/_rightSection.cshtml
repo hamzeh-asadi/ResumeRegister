@@ -1,0 +1,19 @@
+﻿@using System.Security.Claims
+@using ResumeRegister.core.Services.Interfaces
+@inject IPermissionService _permission
+@if (User.Identity.IsAuthenticated)
+{
+    if (_permission.IsUserAdmin(User.FindFirstValue(ClaimTypes.Name)))
+    {
+        <section class="text-center border-bottom pb-4 mb-4">
+            <a href="/manage/index">ورود به بخش مدیریت</a>
+        </section>
+    }
+}
+
+<section class="text-center border-bottom pb-4 mb-4">
+    <a href="http://news.moe.gov.ir/Home" target="_blank">پایگاه اطلاع رسانی وزارت نیرو (پاون) </a>
+</section>
+<section class="text-center border-bottom pb-4 mb-4">
+    <a href="https://iwpco.ir/" target="_blank">شرکت توسعه منابع آب و نیروی ایران </a>
+</section>
